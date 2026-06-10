@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentes Brillantes - Portal Educativo y Recursos IA</title>
+    <!-- Tailwind CSS para diseño moderno y limpio -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para iconos estéticos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- MENÚ / CABECERA -->
+    <header class="bg-gradient-to-r from-red-600 to-red-800 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="brain" class="w-8 h-8 text-yellow-300"></i>
+                <h1 class="text-2xl font-bold tracking-tight">Mentes <span class="text-yellow-300">Brillantes</span></h1>
+            </div>
+            
+            <!-- PANEL DE RECOMPENSAS INTEGRADO EN EL MENÚ -->
+            <div class="mt-4 sm:mt-0 bg-red-900/50 px-4 py-2 rounded-xl border border-red-500/30 flex items-center space-x-4">
+                <div class="text-left">
+                    <p class="text-xs text-red-200 font-bold uppercase tracking-wider">Progreso de Estudio</p>
+                    <p class="text-sm font-extrabold text-white">Nivel <span id="lblNivel">1</span> — <span id="lblXP">0</span> / 100 XP</p>
+                </div>
+                <button onclick="canjearPremio()" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 shadow">
+                    <i data-lucide="gift" class="w-3.5 h-3.5"></i> <span>Canjear Premio (50 XP)</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN DE BIENVENIDA Y BUSCADOR -->
+    <section class="bg-red-50 py-12 px-4 border-b border-gray-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="bg-red-100 text-red-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Portal 100% Gratuito y Libre</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-3 mb-4">Tu Biblioteca Escolar e IA Definitiva</h2>
+            <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+                Sin registros ni cobros ocultos. Explora aplicaciones oficiales de estudio, copia o descarga prompts optimizados para aprender con IA y acumula XP para ganar tus descansos.
+            </p>
+            
+            <!-- Buscador Interactivo Real -->
+            <div class="relative max-w-xl mx-auto">
+                <input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Buscar curso, sitio de juego o tipo de prompt..." class="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 shadow-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all">
+                <i data-lucide="search" class="absolute left-4 top-3.5 text-gray-400 w-5 h-5"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- SECCIÓN: JUEGO Y PRÁCTICA -->
+        <section class="mb-16 bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-2xl border border-purple-100 shadow-sm">
+            <div class="flex items-center space-x-2 text-purple-700 mb-4">
+                <i data-lucide="gamepad-2" class="w-7 h-7"></i>
+                <h2 class="text-2xl font-bold text-gray-900">Zonas de Juego y Práctica Activa</h2>
+            </div>
+            <p class="text-sm text-gray-600 mb-6">Cada vez que hagas clic en una de estas plataformas para practicar tus lecciones, ganarás de forma automática **+15 XP** para tu barra de recompensas.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="https://kahoot.com" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Kahoot!</h4>
+                        <p class="text-xs text-gray-500">Cuestionarios en vivo</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://quizizz.com" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Quizizz</h4>
+                        <p class="text-xs text-gray-500">Prácticas y lecciones</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://www.cerebriti.com" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Cerebriti</h4>
+                        <p class="text-xs text-gray-500">Juegos de mente en español</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://dragonbox.com" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">DragonBox 12+</h4>
+                        <p class="text-xs text-gray-500">Álgebra en forma de juego</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://www.thirteen.org/get-the-math/" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Get the Math</h4>
+                        <p class="text-xs text-gray-500">Matemáticas del mundo real</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://anatomylearning.com" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Anatomy Learning</h4>
+                        <p class="text-xs text-gray-500">Anatomía humana interactiva</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://code.org" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Code.org</h4>
+                        <p class="text-xs text-gray-500">Aprende programación gratis</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+                <a href="https://www.classcraft.com" target="_blank" onclick="ganarXP(15)" class="course-card bg-white p-4 rounded-xl border border-purple-200 hover:border-purple-500 shadow-sm flex items-center justify-between group transition-all">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm group-hover:text-purple-600 transition-colors">Classcraft</h4>
+                        <p class="text-xs text-gray-500">El estudio hecho juego RPG</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-purple-500"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE ENLACES ESCOLARES OFICIALES REDIRECCIONABLES (11 ASIGNATURAS COMPLETAS) -->
+        <section class="mb-16">
+            <div class="flex items-center space-x-2 text-red-600 mb-6">
+                <i data-lucide="folder-open" class="w-7 h-7"></i>
+                <h2 class="text-2xl font-bold text-gray-900">Aplicaciones y Enlaces de Asignaturas (Las 11 Áreas)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="coursesGrid">
+                <!-- 1. Matemática -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-blue-600 mb-3"><i data-lucide="calculator" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Matemática</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://es.khanacademy.org/" target="_blank" class="hover:text-blue-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Khan Academy <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.geogebra.org/" target="_blank" class="hover:text-blue-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">GeoGebra <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 2. Comunicación -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-red-600 mb-3"><i data-lucide="languages" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Comunicación</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://www.rae.es/" target="_blank" class="hover:text-red-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Real Academia Española <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.fundeu.es/" target="_blank" class="hover:text-red-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">FundéuRAE <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 3. Ciencias Sociales -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-amber-600 mb-3"><i data-lucide="globe" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Ciencias Sociales</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://earth.google.com/" target="_blank" class="hover:text-amber-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Google Earth <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://education.nationalgeographic.org/" target="_blank" class="hover:text-amber-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">NatGeo Education <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 4. Ciencia y Tecnología -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-emerald-600 mb-3"><i data-lucide="flask-conical" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Ciencia y Tecnología</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://phet.colorado.edu/es/" target="_blank" class="hover:text-emerald-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Simulaciones PhET <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.nasa.gov/learning-resources/" target="_blank" class="hover:text-emerald-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">NASA Education <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 5. Desarrollo Personal, Ciudadanía y Cívica (DPCC) -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-indigo-600 mb-3"><i data-lucide="users" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">DPCC</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://www.un.org/es/global-issues" target="_blank" class="hover:text-indigo-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Asuntos Globales ONU <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.transparency.org/en/" target="_blank" class="hover:text-indigo-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Transparencia Ciudadana <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 6. Inglés -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-teal-600 mb-3"><i data-lucide="smile" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Inglés</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://www.duolingo.com/" target="_blank" class="hover:text-teal-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Duolingo Web <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.bbc.co.uk/learningenglish/" target="_blank" class="hover:text-teal-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">BBC Learning English <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 7. Arte y Cultura -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-pink-600 mb-3"><i data-lucide="palette" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Arte y Cultura</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://artsandculture.google.com/" target="_blank" class="hover:text-pink-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Google Arts & Culture <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.louvre.fr/en/online-tours" target="_blank" class="hover:text-pink-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Tours Virtuales Louvre <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 8. Educación Física -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-orange-600 mb-3"><i data-lucide="dumbbell" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Educación Física</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://www.who.int/es/news-room/fact-sheets/detail/physical-activity" target="_blank" class="hover:text-orange-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Guías de Salud OMS <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.sports-tracker.com/" target="_blank" class="hover:text-orange-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Sports Tracker Web <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 9. Educación para el Trabajo (EPT) -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-cyan-600 mb-3"><i data-lucide="briefcase" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Educación para el Trabajo</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://www.scratch.mit.edu/" target="_blank" class="hover:text-cyan-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">MIT Scratch (Lógica) <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.tinkercad.com/" target="_blank" class="hover:text-cyan-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Tinkercad Diseño 3D/Circuitos <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 10. Educación Religiosa -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-yellow-600 mb-3"><i data-lucide="bookmark" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Educación Religiosa</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://www.vatican.va/content/vatican/es.html" target="_blank" class="hover:text-yellow-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Archivo Histórico Vaticano <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://www.biblegateway.com/" target="_blank" class="hover:text-yellow-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Bible Gateway Académico <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- 11. Tutoría e Investigación -->
+                <div class="course-card bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-2 text-fuchsia-600 mb-3"><i data-lucide="clipboard-list" class="w-5 h-5"></i><h3 class="font-bold text-base text-gray-800">Tutoría e Investigación</h3></div>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li><a href="https://scholar.google.es/" target="_blank" class="hover:text-fuchsia-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">Google Académico <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                        <li><a href="https://scielo.org/es/" target="_blank" class="hover:text-fuchsia-600 hover:underline flex justify-between items-center p-1 rounded hover:bg-gray-50">SciELO Biblioteca <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: BIBLIOTECA EXTENDIDA DE PROMPTS IA (8 EBOOKS) -->
+        <section class="mb-16 bg-slate-900 text-white p-8 rounded-2xl shadow-lg">
+            <div class="mb-6">
+                <div class="flex items-center space-x-2 text-yellow-400 mb-2">
+                    <i data-lucide="terminal" class="w-6 h-6"></i>
+                    <h2 class="text-2xl font-bold">Mega Biblioteca de Prompts Educativos IA</h2>
+                </div>
+                <p class="text-slate-300 text-sm">
+                    Estructuras avanzadas de ingeniería de prompts clasificadas por objetivos de aprendizaje. **Míralas**, **cópialas** o **descárgalas como .txt** de manera completamente libre.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="promptsGrid">
+                <!-- Ebook 1 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Ebook 1 • Didáctica</span><h4 class="font-bold text-sm text-white mt-1">Explicador Temático de Ciencias</h4><p class="text-xs text-slate-400 mt-2">Traduce conceptos complejos a analogías cotidianas y te evalúa al final con preguntas trampa.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(1)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 2 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Ebook 2 • Didáctica</span><h4 class="font-bold text-sm text-white mt-1">Simulador Histórico y Social</h4><p class="text-xs text-slate-400 mt-2">Adopta el rol de historiador para desglosar eventos de forma crítica y con dilemas de época.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(2)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(2)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 3 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Ebook 3 • Didáctica</span><h4 class="font-bold text-sm text-white mt-1">Entrenador Matemático</h4><p class="text-xs text-slate-400 mt-2">Explica los componentes de un problema mediante ejemplos de distribución real de recursos.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(3)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(3)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 4 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Ebook 4 • Didáctica</span><h4 class="font-bold text-sm text-white mt-1">Tutor de Textos y Literatura</h4><p class="text-xs text-slate-400 mt-2">Analiza corrientes literarias o figuras usando métricas y rimas de la música actual urbana.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(4)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(4)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 5 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Ebook 5 • Evaluación</span><h4 class="font-bold text-sm text-white mt-1">Examinador Estricto Notación (1-20)</h4><p class="text-xs text-slate-400 mt-2">Simula un examen dinámico con preguntas individuales, nota vigesimal, fallas y retroalimentación.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(5)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(5)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 6 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Ebook 6 • Socrático</span><h4 class="font-bold text-sm text-white mt-1">Guía Práctica Paso a Paso Interactiva</h4><p class="text-xs text-slate-400 mt-2">Evita que la IA te dé el resultado matemático directo. Te da pistas y avanzan juntos.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(6)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(6)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 7 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Ebook 7 • Debate</span><h4 class="font-bold text-sm text-white mt-1">Oponente de Argumentación Crítica</h4><p class="text-xs text-slate-400 mt-2">La IA adopta una postura opuesta a la tuya, refuta con lógica y detecta falacias en tu texto.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(7)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(7)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+                <!-- Ebook 8 -->
+                <div class="course-card bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hover:border-yellow-400 transition-all">
+                    <div><span class="text-xs font-bold text-pink-400 uppercase tracking-wider">Ebook 8 • Comprensión</span><h4 class="font-bold text-sm text-white mt-1">Resumen y Cuestionador Inferencial</h4><p class="text-xs text-slate-400 mt-2">Extrae viñetas clave de cualquier texto académico y elabora preguntas deductivas complejas.</p></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="openModal(8)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="eye" class="w-3.5 h-3.5"></i> <span>Ver</span></button>
+                        <button onclick="downloadPrompt(8)" class="bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold py-1.5 px-2 rounded flex items-center justify-center space-x-1"><i data-lucide="download" class="w-3.5 h-3.5"></i> <span>Bajar .txt</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE REDIRECCIÓN A APPS DE IA COMPAÑERAS -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl mx-auto mb-12">
+            <div class="flex items-center space-x-2 mb-4 text-red-600">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+                <h3 class="font-bold text-lg text-gray-900">Aplicaciones IA Oficiales para Procesar tus Prompts</h3>
+            </div>
+            <p class="text-xs text-gray-500 mb-4">Abre de forma externa cualquiera de estas inteligencias artificiales gratuitas para pegar los prompts que copies en este blog:</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <a href="https://chatgpt.com/" target="_blank" class="flex items-center justify-between p-2.5 bg-gray-50 rounded-lg hover:bg-red-50 text-xs font-medium transition-all text-gray-700 hover:text-red-700"><span>ChatGPT</span> <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a>
+                <a href="https://gemini.google.com/" target="_blank" class="flex items-center justify-between p-2.5 bg-gray-50 rounded-lg hover:bg-red-50 text-xs font-medium transition-all text-gray-700 hover:text-red-700"><span>Google Gemini</span> <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a>
+                <a href="https://www.perplexity.ai/" target="_blank" class="flex items-center justify-between p-2.5 bg-gray-50 rounded-lg hover:bg-red-50 text-xs font-medium transition-all text-gray-700 hover:text-red-700"><span>Perplexity AI</span> <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- VENTANA MODAL FLOTANTE (INTERACTIVA PARA VER PROMPTS) -->
+    <div id="promptModal" class="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider" id="modalEbookLabel">Ebook X</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-1 mb-4" id="modalEbookTitle">Título del Prompt</h3>
+            <div class="bg-gray-900 text-yellow-400 p-4 rounded-xl font-mono text-xs sm:text-sm overflow-y-auto max-h-[250px] whitespace-pre-wrap select-all mb-4"><code id="promptCodeContainer">Texto del prompt...</code></div>
+            <div class="flex justify-end space-x-2">
+                <button onclick="closeModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2 px-4 rounded-xl transition-all">Cerrar</button>
+                <button onclick="copyCurrentPrompt()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded-xl transition-all flex items-center space-x-1"><i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copiar Texto</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER DEL BLOG -->
+    <footer class="bg-gray-900 text-gray-400 text-xs py-8 border-t border-gray-800 text-center">
+        <p class="mb-2">&copy; 2026 Mentes Brillantes. Proyecto sin fines de lucro enfocado en la educación escolar.</p>
+    </footer>
+
+    <!-- JAVASCRIPT INTEGRADO -->
+    <script>
+        lucide.createIcons();
+
+        const promptsDatabase = {
+            1: { title: "Explicador Didáctico Estilo Secundaria", label: "Ebook 1 • Didáctica", text: "Actúa como un profesor de [Materia, ej: Física]. Explícame el concepto de [Tema, ej: las leyes de la termodinámica] como si fuera un estudiante de 15 años. Utiliza analogías de la vida cotidiana, evita el lenguaje demasiado técnico en el primer párrafo y, al final, hazme una pregunta capciosa para comprobar si lo entendí." },
+            2: { title: "Simulador de Entrevistas Históricas", label: "Ebook 2 • Didáctica", text: "Actúa como un historiador experto en [Materia, ej: Ciencias Sociales]. Explícame los sucesos de [Tema, ej: la Independencia del Perú] como si fuera un estudiante de 15 años. Utiliza analogías de conflictos sencillos o dinámicas actuales en el primer párrafo para romper la complejidad y, al final, hazme una pregunta capciosa o crítica para ver si capté el dilema moral o político del evento." },
+            3: { title: "Tutor Guía de Razonamiento Lógico", label: "Ebook 3 • Didáctica", text: "Actúa como un docente didáctico de [Materia, ej: Matemática]. Explícame paso a paso cómo abordar los problemas de [Tema, ej: ecuaciones de segundo grado] pensando en un alumno de 15 años. Desglosa los componentes con ejemplos de reparto de bienes reales. No resuelvas el ejercicio de golpe, y plantéame un problema capcioso al final para comprobar mi lógica." },
+            4: { title: "Analista de Figuras y Lecturas Literarias", label: "Ebook 4 • Didáctica", text: "Actúa como un profesor crítico de [Materia, ej: Comunicación y Literatura]. Explícame qué es y cómo identificar [Tema, ej: las metáforas y el hipérbaton] enfocándote en un estudiante de 15 años. Tradúcelo usando ejemplos de canciones populares actuales en el primer párrafo. Para cerrar, ponme un texto corto con una pregunta capciosa para demostrarte que lo entendí." },
+            5: { title: "Examinador Estricto por Preguntas", label: "Ebook 5 • Evaluación", text: "Actúa como un examinador estricto pero de apoyo para el nivel de 4.° de secundaria. Voy a dar un examen sobre [Tema, ej: La Segunda Guerra Mundial / Factorización de polinomios]. Hazme una pregunta difícil a la vez. Espera mi respuesta. Cuando te responda, califícame del 1 al 20, dime en qué fallé textualmente y cómo mejorar, y luego hazme la siguiente pregunta." },
+            6: { title: "Tutor Interactivo de Codiseño Socrático", label: "Ebook 6 • Socrático", text: "Te voy a dar un problema de [Materia, ej: Geometría]. No me des la respuesta final directamente. En su lugar, guíame paso a paso. Dame la primera pista o el primer paso matemático que debo dar y pregúntame cuál creo que es el siguiente paso. Vamos a resolverlo juntos de forma interactiva." },
+            7: { title: "Oponente en Debates Contra Argumentos", label: "Ebook 7 • Debate", text: "Quiero practicar mis habilidades de argumentación y debate para mi clase de [Curso, ej: Desarrollo Personal o Historia]. El tema es [Tema, ej: El impacto de la inteligencia artificial en el empleo / El uso de la energía nuclear]. Adopta una postura opuesta a la mía. Yo empezaré diciendo mi argumento y tú debes refutarlo usando datos lógicos y falacias comunes si las detectas en mi texto. Mantén respuestas cortas." },
+            8: { title: "Analista de Comprensión Inferencial de Textos", label: "Ebook 8 • Comprensión", text: "Voy a pegarte un texto científico/histórico/literario. Primero, haz un resumen ejecutivo de los 3 puntos clave en viñetas cortas. Luego, genera 2 preguntas de comprensión lectora de nivel inferencial (que requieran deducir, no solo copiar lo que dice el texto) para que yo las responda." }
+        };
+
+        let xp = parseInt(localStorage.getItem('edu_xp')) || 0;
+        let nivel = parseInt(localStorage.getItem('edu_nivel')) || 1;
+        let currentActivePromptId = null;
+
+        function actualizarPanel() {
+            document.getElementById('lblXP').innerText = xp;
+            document.getElementById('lblNivel').innerText = nivel;
+        }
+
+        function ganarXP(cantidad) {
+            xp += cantidad;
+            if (xp >= 100) { xp -= 100; nivel += 1; alert("🎉 ¡Buen trabajo! Subiste al Nivel " + nivel); }
+            localStorage.setItem('edu_xp', xp); localStorage.setItem('edu_nivel', nivel);
+            actualizarPanel();
+        }
+
+        function canjearPremio() {
+            if (xp >= 50) { xp -= 50; localStorage.setItem('edu_xp', xp); actualizarPanel(); alert("🏆 ¡Premio! Tómate 15 minutos de descanso."); }
+            else { alert("❌ Necesitas 50 XP mínimo."); }
+        }
+
+        function searchFunction() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(input) ? "block" : "none";
+            });
+        }
+
+        function openModal(id) {
+            currentActivePromptId = id; const data = promptsDatabase[id];
+            document.getElementById('modalEbookLabel').innerText = data.label;
+            document.getElementById('modalEbookTitle').innerText = data.title;
+            document.getElementById('promptCodeContainer').innerText = data.text;
+            document.getElementById('promptModal').classList.remove('hidden');
+        }
+
+        function closeModal() { document.getElementById('promptModal').classList.add('hidden'); }
+
+        function copyCurrentPrompt() {
+            if(!currentActivePromptId) return;
+            navigator.clipboard.writeText(promptsDatabase[currentActivePromptId].text).then(() => { alert("📋 ¡Copiado con éxito!"); });
+        }
+
+        function downloadPrompt(id) {
+            const data = promptsDatabase[id];
+            const content = `MENTES BRILLANTES — RECURSOS EDUCATIVOS\n\nPrompt: ${data.title}\nCategoría: ${data.label}\n\nTEXTO:\n${data.text}`;
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a'); link.href = url; link.download = `${data.title.toLowerCase().replace(/ /g,"_")}.txt`;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        actualizarPanel();
+    </script>
+</body>
+</html>
